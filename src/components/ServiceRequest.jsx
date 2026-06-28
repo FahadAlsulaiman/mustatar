@@ -28,8 +28,10 @@ export default function ServiceRequest() {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-navy font-medium text-sm text-start">{t.request.titleLabel}</label>
+            <label htmlFor="request-title" className="text-navy font-medium text-sm text-start">{t.request.titleLabel}</label>
             <input
+              id="request-title"
+              name="title"
               type="text"
               placeholder={t.request.titlePlaceholder}
               value={form.title}
@@ -40,8 +42,10 @@ export default function ServiceRequest() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-navy font-medium text-sm text-start">{t.request.detailsLabel}</label>
+            <label htmlFor="request-details" className="text-navy font-medium text-sm text-start">{t.request.detailsLabel}</label>
             <textarea
+              id="request-details"
+              name="details"
               placeholder={t.request.detailsPlaceholder}
               value={form.details}
               onChange={(e) => setForm({ ...form, details: e.target.value })}
