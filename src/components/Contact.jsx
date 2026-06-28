@@ -13,18 +13,25 @@ export default function Contact() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-          {/* Map */}
-          <div className="rounded-xl overflow-hidden shadow-sm h-72 md:h-96 bg-gray-100">
+          {/* Map — cookie-free OpenStreetMap embed (avoids third-party cookies) */}
+          <div className="relative rounded-xl overflow-hidden shadow-sm h-72 md:h-96 bg-gray-100">
             <iframe
               title={c.title}
-              src="https://www.google.com/maps?q=Riyadh+Southern+Ring+Road+exit+24&output=embed"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=46.690%2C24.560%2C46.790%2C24.620&layer=mapnik&marker=24.590%2C46.740"
               width="100%"
               height="100%"
               style={{ border: 0 }}
-              allowFullScreen=""
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="no-referrer"
             />
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%20%D8%A7%D9%84%D8%AF%D8%A7%D8%A6%D8%B1%D9%8A%20%D8%A7%D9%84%D8%AC%D9%86%D9%88%D8%A8%D9%8A%20%D8%A7%D9%84%D9%81%D8%B1%D8%B9%D9%8A%20%D9%85%D8%AE%D8%B1%D8%AC%2024"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-3 end-3 bg-navy/90 text-white text-xs font-medium px-3 py-1.5 rounded-md hover:bg-navy transition-colors"
+            >
+              {c.viewOnMap}
+            </a>
           </div>
 
           {/* Contact info */}

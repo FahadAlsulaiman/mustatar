@@ -119,6 +119,7 @@ export const translations = {
       website: 'mustatar.com.sa',
       phone: '050 3379 688',
       cr: 'السجل التجاري 1009099133',
+      viewOnMap: 'فتح في خرائط Google',
     },
     footer: {
       about: 'شركة مساهمة مبسطة مهنية تقدم خدمات قانونية متخصصة بخبرة ومهنية متكاملة.',
@@ -248,6 +249,7 @@ export const translations = {
       website: 'mustatar.com.sa',
       phone: '050 3379 688',
       cr: 'C.R. 1009099133',
+      viewOnMap: 'Open in Google Maps',
     },
     footer: {
       about: 'A professional simplified joint-stock company providing specialized legal services with full expertise and professionalism.',
