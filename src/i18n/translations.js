@@ -85,6 +85,28 @@ export const translations = {
             'عضو أساسي في الهيئة السعودية للمحامين.',
           ],
         },
+        // TODO: placeholder member — replace with real details
+        {
+          name: 'فهد بن محمد العتيبي',
+          role: 'محامي',
+          points: [
+            'محامٍ بخبرة تفوق (3) سنوات في مهنة المحاماة.',
+            'مختص في القضايا العمالية والتجارية وصياغة العقود.',
+            'مرخص من وزارة العدل في مهنة المحاماة.',
+            'عضو في الهيئة السعودية للمحامين.',
+          ],
+        },
+        // TODO: placeholder member — replace with real details
+        {
+          name: 'نورة بنت عبدالعزيز السالم',
+          role: 'مستشار قانوني',
+          points: [
+            'مستشارة قانونية بخبرة في الاستشارات والدراسات النظامية.',
+            'مختصة في خدمات الملكية الفكرية والحوكمة.',
+            'تقدّم الدعم القانوني للمنشآت التجارية والأفراد.',
+            'حاصلة على درجة البكالوريوس في الأنظمة (القانون).',
+          ],
+        },
       ],
     },
     clients: {
@@ -218,6 +240,28 @@ export const translations = {
             'Director of Criminal Litigation services at the firm.',
             'Licensed by the Ministry of Justice in law practice (No. 44/3562).',
             'Active member of the Saudi Bar Association.',
+          ],
+        },
+        // TODO: placeholder member — replace with real details
+        {
+          name: 'Fahd Mohammed Al-Otaibi',
+          role: 'Lawyer',
+          points: [
+            'Lawyer with over 3 years of experience in the legal profession.',
+            'Specialist in labor and commercial cases and contract drafting.',
+            'Licensed by the Ministry of Justice in law practice.',
+            'Member of the Saudi Bar Association.',
+          ],
+        },
+        // TODO: placeholder member — replace with real details
+        {
+          name: 'Noura Abdulaziz Al-Salem',
+          role: 'Legal Consultant',
+          points: [
+            'Legal consultant experienced in advisory and regulatory studies.',
+            'Specialized in intellectual property and corporate governance services.',
+            'Provides legal support to businesses and individuals.',
+            'Holds a Bachelor of Law.',
           ],
         },
       ],
