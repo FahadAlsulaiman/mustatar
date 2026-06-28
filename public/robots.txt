@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mustatar.com.sa/sitemap.xml

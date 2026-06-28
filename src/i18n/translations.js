@@ -129,6 +129,11 @@ export const translations = {
       rights: 'جميع الحقوق محفوظة © 2025 لدى مُستطر',
     },
     langButton: 'E',
+    seo: {
+      title: 'مُستطر للمحاماة والاستشارات | محامون ومستشارون في الرياض',
+      description:
+        'مُستطر محامون ومستشارون – شركة محاماة مهنية في الرياض تقدّم خدمات المحاماة والتقاضي، صياغة العقود والاستشارات القانونية، الملكية الفكرية، الحوكمة، وخدمات التوثيق والمساندة.',
+    },
   },
 
   en: {
@@ -259,6 +264,11 @@ export const translations = {
       rights: 'All rights reserved © 2025 Mustatar',
     },
     langButton: 'ع',
+    seo: {
+      title: 'Mustatar Lawyers & Consultants | Law Firm in Riyadh',
+      description:
+        'Mustatar Lawyers & Consultants is a professional law firm in Riyadh providing litigation, contract drafting and legal advisory, intellectual property, corporate governance, and notarization & support services.',
+    },
   },
 }
 

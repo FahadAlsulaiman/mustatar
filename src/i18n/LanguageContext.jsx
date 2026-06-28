@@ -16,12 +16,15 @@ export function LanguageProvider({ children }) {
   const t = translations[lang]
   const dir = t.dir
 
-  // Keep <html> lang/dir in sync with the active language
+  // Keep <html> lang/dir and SEO tags in sync with the active language
   useEffect(() => {
     document.documentElement.lang = lang
     document.documentElement.dir = dir
+    document.title = t.seo.title
+    const meta = document.querySelector('meta[name="description"]')
+    if (meta) meta.setAttribute('content', t.seo.description)
     localStorage.setItem(STORAGE_KEY, lang)
-  }, [lang, dir])
+  }, [lang, dir, t])
 
   // Fade content out, flip language + direction while invisible, then fade back in
   const toggleLang = () => {
