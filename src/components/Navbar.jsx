@@ -47,7 +47,7 @@ export default function Navbar() {
         {/* Leading side: Logo (right in AR, left in EN) */}
         <a href="#hero" className="flex items-center" aria-label={t.brand.name}>
           <img
-            src="/hero/logo.png"
+            src="/hero/logo.webp"
             alt={t.brand.name}
             className="h-9 md:h-11 w-auto"
           />

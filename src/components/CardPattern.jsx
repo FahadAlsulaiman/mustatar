@@ -8,7 +8,7 @@ export default function CardPattern({ className = '' }) {
     <div
       className={`absolute inset-x-0 bottom-0 h-12 opacity-60 pointer-events-none ${className}`}
       style={{
-        backgroundImage: 'url(/hero/pattern-gold.png)',
+        backgroundImage: 'url(/hero/pattern-gold.webp)',
         backgroundSize: '40px auto',
         backgroundRepeat: 'repeat',
         backgroundPosition: 'center bottom',
