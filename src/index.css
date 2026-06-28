@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background-color: #ffffff;
+  color: #0F1B2D;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchored sections so they land below the fixed navbar (h-16 = 4rem) */
+  scroll-padding-top: 4rem;
+}
+
+@layer utilities {
+  .section-padding {
+    @apply px-6 md:px-16 lg:px-24;
+  }
+}
