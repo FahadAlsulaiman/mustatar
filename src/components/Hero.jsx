@@ -42,9 +42,11 @@ export default function Hero() {
           className="w-72 md:w-96 h-auto mb-6"
         />
 
-        <p className="text-gray-300 text-base md:text-lg leading-relaxed mt-4">
-          {t.hero.tagline}
-        </p>
+        {t.hero.tagline && (
+          <p className="text-gray-300 text-base md:text-lg leading-relaxed mt-4">
+            {t.hero.tagline}
+          </p>
+        )}
 
         <a
           href="#about"

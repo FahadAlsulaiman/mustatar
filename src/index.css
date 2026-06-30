@@ -18,6 +18,8 @@ html {
   scroll-behavior: smooth;
   /* Offset anchored sections so they land below the fixed navbar (h-16 = 4rem) */
   scroll-padding-top: 4rem;
+  /* Scale all rem-based typography up ~15% per client feedback */
+  font-size: 115%;
 }
 
 @layer utilities {

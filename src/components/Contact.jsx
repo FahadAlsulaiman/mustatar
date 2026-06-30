@@ -25,7 +25,7 @@ export default function Contact() {
               referrerPolicy="no-referrer"
             />
             <a
-              href="https://www.google.com/maps/search/?api=1&query=%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%20%D8%A7%D9%84%D8%AF%D8%A7%D8%A6%D8%B1%D9%8A%20%D8%A7%D9%84%D8%AC%D9%86%D9%88%D8%A8%D9%8A%20%D8%A7%D9%84%D9%81%D8%B1%D8%B9%D9%8A%20%D9%85%D8%AE%D8%B1%D8%AC%2024"
+              href="https://www.google.com/maps/search/?api=1&query=RKNA3169%20Riyadh"
               target="_blank"
               rel="noopener noreferrer"
               className="absolute bottom-3 end-3 bg-navy/90 text-white text-xs font-medium px-3 py-1.5 rounded-md hover:bg-navy transition-colors"

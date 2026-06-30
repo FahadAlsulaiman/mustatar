@@ -1,3 +1,4 @@
+import { FileText } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 
 export default function Footer() {
@@ -18,7 +19,16 @@ export default function Footer() {
           {/* About */}
           <div className="text-start col-span-2 md:col-span-1">
             <h4 className="text-gold font-bold mb-4 text-base">{t.brand.name}</h4>
-            <p className="text-gray-500 text-xs leading-relaxed">{t.footer.about}</p>
+            <p className="text-gray-500 text-xs leading-relaxed mb-4">{t.footer.about}</p>
+            <a
+              href={t.footer.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-gold/40 text-gold text-xs px-4 py-2 rounded-md hover:bg-gold hover:text-navy transition-colors"
+            >
+              <FileText size={14} />
+              {t.footer.profile}
+            </a>
           </div>
 
           {/* Quick links */}
