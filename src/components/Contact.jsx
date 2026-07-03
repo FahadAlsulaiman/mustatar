@@ -48,7 +48,7 @@ export default function Contact() {
               <ContactRow icon={Globe} text={c.website} href={`https://${c.website}`} />
             </div>
 
-            <p className="text-gray-400 text-xs">{c.cr}</p>
+            <p className="text-gray-500 text-xs">{c.cr}</p>
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ export default function Navbar() {
   const LangButton = ({ className = '' }) => (
     <button
       onClick={toggleLang}
-      className={`w-12 h-12 inline-flex items-center justify-center rounded-md bg-gold text-white text-lg font-medium hover:bg-opacity-90 transition-colors ${className}`}
+      className={`w-12 h-12 inline-flex items-center justify-center rounded-md bg-gold text-navy text-lg font-bold hover:bg-opacity-90 transition-colors ${className}`}
       aria-label="Toggle language"
     >
       <span className="leading-none" style={{ fontFamily: 'system-ui, sans-serif' }}>

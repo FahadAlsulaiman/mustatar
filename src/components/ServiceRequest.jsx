@@ -37,7 +37,7 @@ export default function ServiceRequest() {
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               required
-              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-400"
+              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-500"
             />
           </div>
 
@@ -51,7 +51,7 @@ export default function ServiceRequest() {
               onChange={(e) => setForm({ ...form, details: e.target.value })}
               required
               rows={5}
-              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-400 resize-none"
+              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-500 resize-none"
             />
           </div>
 
