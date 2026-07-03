@@ -1,17 +1,33 @@
 import { useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 
+const emptyForm = { name: '', email: '', mobile: '', title: '', details: '' }
+
 export default function ServiceRequest() {
   const { t } = useLanguage()
-  const [form, setForm] = useState({ title: '', details: '' })
+  const [form, setForm] = useState(emptyForm)
   const [submitted, setSubmitted] = useState(false)
+
+  const handleChange = (field) => (e) => setForm({ ...form, [field]: e.target.value })
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setSubmitted(true)
     setTimeout(() => setSubmitted(false), 3000)
-    setForm({ title: '', details: '' })
+    setForm(emptyForm)
   }
+
+  const inputClass =
+    'w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-500'
+
+  const Field = ({ id, label, children }) => (
+    <div className="flex flex-col gap-2">
+      <label htmlFor={id} className="text-navy font-medium text-sm text-start">
+        {label} <span className="text-red-500" aria-hidden="true">*</span>
+      </label>
+      {children}
+    </div>
+  )
 
   return (
     <section id="request" className="py-20 px-6 md:px-16 lg:px-24 bg-gray-50">
@@ -26,34 +42,85 @@ export default function ServiceRequest() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="request-title" className="text-navy font-medium text-sm text-start">{t.request.titleLabel}</label>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate={false}>
+          {/* Name + Mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <Field id="request-name" label={t.request.nameLabel}>
+              <input
+                id="request-name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                placeholder={t.request.namePlaceholder}
+                value={form.name}
+                onChange={handleChange('name')}
+                required
+                className={inputClass}
+              />
+            </Field>
+
+            <Field id="request-mobile" label={t.request.mobileLabel}>
+              <input
+                id="request-mobile"
+                name="mobile"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                dir="ltr"
+                placeholder={t.request.mobilePlaceholder}
+                value={form.mobile}
+                onChange={handleChange('mobile')}
+                required
+                pattern="[0-9+ ]{8,}"
+                title={t.request.mobileError}
+                className={`${inputClass} text-start`}
+              />
+            </Field>
+          </div>
+
+          {/* Email */}
+          <Field id="request-email" label={t.request.emailLabel}>
+            <input
+              id="request-email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              dir="ltr"
+              placeholder={t.request.emailPlaceholder}
+              value={form.email}
+              onChange={handleChange('email')}
+              required
+              className={`${inputClass} text-start`}
+            />
+          </Field>
+
+          {/* Service title */}
+          <Field id="request-title" label={t.request.titleLabel}>
             <input
               id="request-title"
               name="title"
               type="text"
               placeholder={t.request.titlePlaceholder}
               value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              onChange={handleChange('title')}
               required
-              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-500"
+              className={inputClass}
             />
-          </div>
+          </Field>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="request-details" className="text-navy font-medium text-sm text-start">{t.request.detailsLabel}</label>
+          {/* Service details */}
+          <Field id="request-details" label={t.request.detailsLabel}>
             <textarea
               id="request-details"
               name="details"
               placeholder={t.request.detailsPlaceholder}
               value={form.details}
-              onChange={(e) => setForm({ ...form, details: e.target.value })}
+              onChange={handleChange('details')}
               required
               rows={5}
-              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-500 resize-none"
+              className={`${inputClass} resize-none`}
             />
-          </div>
+          </Field>
 
           <button
             type="submit"
