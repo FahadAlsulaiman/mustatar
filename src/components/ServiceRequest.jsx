@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { isValidPhoneNumber } from 'libphonenumber-js'
 import { useLanguage } from '../i18n/LanguageContext'
+import PhoneInput from './PhoneInput'
 
 const emptyForm = { name: '', email: '', mobile: '', title: '', details: '' }
+const DEFAULT_COUNTRY = 'SA'
 
 const inputClass =
   'w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-500'
@@ -20,17 +23,27 @@ function Field({ id, label, children }) {
 }
 
 export default function ServiceRequest() {
-  const { t } = useLanguage()
+  const { t, lang, dir } = useLanguage()
   const [form, setForm] = useState(emptyForm)
+  const [country, setCountry] = useState(DEFAULT_COUNTRY)
+  const [mobileTouched, setMobileTouched] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
   const handleChange = (field) => (e) => setForm({ ...form, [field]: e.target.value })
 
+  const mobileValid = form.mobile.trim() !== '' && isValidPhoneNumber(form.mobile, country)
+  const showMobileError = mobileTouched && !mobileValid
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!mobileValid) {
+      setMobileTouched(true)
+      return
+    }
     setSubmitted(true)
     setTimeout(() => setSubmitted(false), 3000)
     setForm(emptyForm)
+    setMobileTouched(false)
   }
 
   return (
@@ -46,7 +59,7 @@ export default function ServiceRequest() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate={false}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {/* Name + Mobile */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <Field id="request-name" label={t.request.nameLabel}>
@@ -64,21 +77,22 @@ export default function ServiceRequest() {
             </Field>
 
             <Field id="request-mobile" label={t.request.mobileLabel}>
-              <input
+              <PhoneInput
                 id="request-mobile"
                 name="mobile"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                dir="ltr"
-                placeholder={t.request.mobilePlaceholder}
+                lang={lang}
+                dir={dir}
+                country={country}
+                onCountryChange={(iso) => setCountry(iso)}
                 value={form.mobile}
-                onChange={handleChange('mobile')}
-                required
-                pattern="[0-9+ ]{8,}"
-                title={t.request.mobileError}
-                className={`${inputClass} text-start`}
+                onChange={(v) => setForm({ ...form, mobile: v })}
+                onBlur={() => setMobileTouched(true)}
+                invalid={showMobileError}
+                placeholder={t.request.mobilePlaceholder}
               />
+              {showMobileError && (
+                <p className="text-red-500 text-xs">{t.request.mobileError}</p>
+              )}
             </Field>
           </div>
 
