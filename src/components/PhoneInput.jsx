@@ -90,7 +90,9 @@ export default function PhoneInput({
   }
 
   return (
-    <div ref={wrapRef} className="relative">
+    // dir="ltr" so the phone field never flips when the page language is RTL —
+    // a phone number always reads left-to-right.
+    <div ref={wrapRef} dir="ltr" className="relative">
       <div
         className={`flex items-stretch rounded-lg border bg-white overflow-hidden focus-within:ring-2 focus-within:ring-gold ${
           invalid ? 'border-red-400' : 'border-gray-200'
@@ -103,7 +105,7 @@ export default function PhoneInput({
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-label="Select country code"
-          className="flex items-center gap-1.5 px-3 border-e border-gray-200 text-sm text-navy hover:bg-gray-50 flex-shrink-0"
+          className="flex items-center gap-1.5 px-3 border-r border-gray-200 text-sm text-navy hover:bg-gray-50 flex-shrink-0"
         >
           <span className="text-base leading-none">{selected?.flag}</span>
           <span dir="ltr" className="font-medium">+{selected?.dial}</span>
@@ -128,10 +130,8 @@ export default function PhoneInput({
 
       {/* Searchable dropdown */}
       {open && (
-        <div
-          className="absolute z-30 mt-1 w-full sm:w-80 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden"
-          style={dir === 'rtl' ? { right: 0 } : { left: 0 }}
-        >
+        <div className="absolute z-30 mt-1 left-0 w-full sm:w-80 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+
           <div className="flex items-center gap-2 px-3 py-2 border-b border-gray-100">
             <Search size={15} className="text-gray-400 flex-shrink-0" />
             <input
