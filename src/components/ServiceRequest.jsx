@@ -155,8 +155,23 @@ export default function ServiceRequest() {
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
-          {/* Honeypot — hidden from users, bots tend to fill it */}
-          <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, overflow: 'hidden' }}>
+          {/* Honeypot — hidden from users, bots tend to fill it.
+              Uses clip (not left:-9999px) so it never widens the page / causes
+              horizontal scroll on mobile. */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              width: '1px',
+              height: '1px',
+              padding: 0,
+              margin: '-1px',
+              overflow: 'hidden',
+              clip: 'rect(0, 0, 0, 0)',
+              whiteSpace: 'nowrap',
+              border: 0,
+            }}
+          >
             <label htmlFor={hpField}>Company website</label>
             <input
               id={hpField}

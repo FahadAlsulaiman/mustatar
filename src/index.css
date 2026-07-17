@@ -12,6 +12,8 @@ body {
   font-family: 'Tajawal', sans-serif;
   background-color: #ffffff;
   color: #0F1B2D;
+  /* Prevent accidental horizontal scroll on mobile */
+  overflow-x: hidden;
 }
 
 html {
