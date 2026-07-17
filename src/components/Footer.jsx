@@ -64,7 +64,7 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-4 text-sm">{t.footer.contactTitle}</h4>
             <ul className="flex flex-col gap-2 text-xs text-gray-400">
               <li>{t.contact.address}</li>
-              <li dir="ltr" className="text-start">{t.contact.phone}</li>
+              <li><bdi dir="ltr">{t.contact.phone}</bdi></li>
               <li>{t.contact.email}</li>
               <li>{t.contact.website}</li>
             </ul>
