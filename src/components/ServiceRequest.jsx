@@ -3,6 +3,22 @@ import { useLanguage } from '../i18n/LanguageContext'
 
 const emptyForm = { name: '', email: '', mobile: '', title: '', details: '' }
 
+const inputClass =
+  'w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-500'
+
+// Defined at module scope so its identity is stable across re-renders —
+// otherwise the inputs remount on every keystroke and lose focus.
+function Field({ id, label, children }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label htmlFor={id} className="text-navy font-medium text-sm text-start">
+        {label} <span className="text-red-500" aria-hidden="true">*</span>
+      </label>
+      {children}
+    </div>
+  )
+}
+
 export default function ServiceRequest() {
   const { t } = useLanguage()
   const [form, setForm] = useState(emptyForm)
@@ -16,18 +32,6 @@ export default function ServiceRequest() {
     setTimeout(() => setSubmitted(false), 3000)
     setForm(emptyForm)
   }
-
-  const inputClass =
-    'w-full border border-gray-200 rounded-lg px-4 py-3 text-start text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gold placeholder-gray-500'
-
-  const Field = ({ id, label, children }) => (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-navy font-medium text-sm text-start">
-        {label} <span className="text-red-500" aria-hidden="true">*</span>
-      </label>
-      {children}
-    </div>
-  )
 
   return (
     <section id="request" className="py-20 px-6 md:px-16 lg:px-24 bg-gray-50">
