@@ -36,6 +36,7 @@ export default function PhoneInput({
       names = null
     }
     return getCountries()
+      .filter((iso) => iso !== 'IL')
       .map((iso) => ({
         iso,
         name: (names && names.of(iso)) || iso,
