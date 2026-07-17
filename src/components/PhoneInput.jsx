@@ -2,6 +2,13 @@ import { useMemo, useRef, useState, useEffect } from 'react'
 import { ChevronDown, Search, Check } from 'lucide-react'
 import { getCountries, getCountryCallingCode } from 'libphonenumber-js'
 
+// Convert Arabic-Indic (٠-٩) and Persian (۰-۹) numerals to English digits (0-9)
+function toEnglishDigits(s) {
+  return s
+    .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 0x0660))
+    .replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 0x06f0))
+}
+
 // ISO country code -> flag emoji (regional indicator letters)
 function flagEmoji(iso) {
   return iso
@@ -113,7 +120,7 @@ export default function PhoneInput({
           dir="ltr"
           placeholder={placeholder}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(toEnglishDigits(e.target.value))}
           onBlur={onBlur}
           className="flex-1 min-w-0 px-4 py-3 text-start text-sm bg-white focus:outline-none placeholder-gray-500"
         />
