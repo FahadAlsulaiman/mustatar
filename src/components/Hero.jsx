@@ -26,7 +26,7 @@ export default function Hero() {
       {/* Decorative geometric pattern strip on the left edge.
           Transparent gold motif shows its lines directly over the dark hero. */}
       <div
-        className="absolute inset-y-0 left-0 w-24 md:w-40 bg-repeat-y bg-top pointer-events-none opacity-25"
+        className="absolute inset-y-0 end-0 w-24 md:w-40 bg-repeat-y bg-top pointer-events-none opacity-25"
         style={{
           backgroundImage: 'url(/hero/pattern-gold.webp)',
           backgroundSize: '100% auto',
