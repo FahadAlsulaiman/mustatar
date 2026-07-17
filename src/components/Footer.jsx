@@ -22,8 +22,7 @@ export default function Footer() {
             <p className="text-gray-400 text-xs leading-relaxed mb-4">{t.footer.about}</p>
             <a
               href={t.footer.profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="inline-flex items-center gap-2 border border-gold/40 text-gold text-xs px-4 py-2 rounded-md hover:bg-gold hover:text-navy transition-colors"
             >
               <FileText size={14} />
