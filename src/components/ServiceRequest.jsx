@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { isValidPhoneNumber } from 'libphonenumber-js'
+import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js'
 import { useLanguage } from '../i18n/LanguageContext'
 import PhoneInput from './PhoneInput'
 import Turnstile from './Turnstile'
@@ -7,9 +7,14 @@ import Turnstile from './Turnstile'
 const emptyForm = { name: '', email: '', mobile: '', title: '', details: '' }
 const DEFAULT_COUNTRY = 'SA'
 
-// CAPTCHA + backend submission are dormant until we go live.
-// Flip to true (and add real Turnstile keys + deploy the function) to enable.
+// CAPTCHA is dormant until go-live. When enabled, the Turnstile token is sent
+// to Web3Forms, which verifies it server-side.
 const CAPTCHA_ENABLED = false
+
+// Web3Forms access key (public by design — domain-restricted + rate-limited).
+// Get a free key at https://web3forms.com using Info@mustatar.com.sa
+const WEB3FORMS_ACCESS_KEY = '2fb7eddb-222b-49df-9135-59f1fee8a57e'
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 
 // Length caps (defense against oversized payloads)
 const MAX = { name: 60, email: 254, title: 120, details: 1500 }
@@ -103,30 +108,44 @@ export default function ServiceRequest() {
 
     setTouched({ name: true, email: true, mobile: true, title: true, details: true })
     if (Object.values(errors).some(Boolean)) return
+    if (CAPTCHA_ENABLED && !captchaToken) return // CAPTCHA not solved
 
-    // CAPTCHA + backend are dormant until we go live — show local success for now.
-    if (!CAPTCHA_ENABLED) {
-      setSubmitted(true)
-      setTimeout(() => setSubmitted(false), 4000)
-      setForm(emptyForm)
-      setTouched({})
-      mountedAt.current = Date.now()
-      return
+    // Normalize the phone to international format for the email
+    let phone = form.mobile
+    try {
+      phone = parsePhoneNumber(form.mobile, country).number
+    } catch {
+      /* fall back to the raw value */
     }
-
-    if (!captchaToken) return // CAPTCHA not solved
 
     setSubmitting(true)
     try {
-      const res = await fetch('/api/contact', {
+      const payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `طلب خدمة جديد من الموقع — ${form.title}`,
+        from_name: 'موقع مُستطر',
+        replyto: form.email,
+        botcheck: honeypot.current || '',
+        Name: form.name,
+        Email: form.email,
+        Mobile: phone,
+        Service: form.title,
+        Details: form.details,
+      }
+      if (CAPTCHA_ENABLED && captchaToken) {
+        payload['cf-turnstile-response'] = captchaToken
+      }
+
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ ...form, token: captchaToken, hp: honeypot.current }),
+        headers: { 'content-type': 'application/json', accept: 'application/json' },
+        body: JSON.stringify(payload),
       })
       const out = await res.json().catch(() => ({}))
-      if (res.ok && out.ok) {
+
+      if (res.ok && out.success) {
         setSubmitted(true)
-        setTimeout(() => setSubmitted(false), 4000)
+        setTimeout(() => setSubmitted(false), 5000)
         setForm(emptyForm)
         setTouched({})
       } else {
