@@ -126,15 +126,71 @@ To enable: set it to `true` and put your real site key in [`src/components/Turns
 
 ## Deployment
 
-Hosted on **Cloudflare** as a Worker with static assets.
+Hosted on **Cloudflare** as a Worker with static assets. Deploys are currently **manual (Direct Upload)** — the site does *not* update when you push to GitHub. Follow the steps below every time you want changes to go live.
+
+### Deploying a new build
+
+**1. Build the site**
 
 ```bash
-npm run build     # produces dist/
+cd mustatar
+npm install      # only needed if dependencies changed
+npm run build
 ```
 
-Then upload the **`dist/` folder** in the Cloudflare dashboard (Workers & Pages → your project → Deployments → Create deployment).
+This regenerates the `dist/` folder. Open it in Finder with:
 
-> Deploys are currently manual (Direct Upload). Connecting the GitHub repo — or using `wrangler pages deploy dist` — would make every push deploy automatically.
+```bash
+open dist
+```
+
+**2. Upload to Cloudflare**
+
+1. Go to <https://dash.cloudflare.com> → **Workers & Pages**.
+2. Open the project (**`polished-king-783b`**).
+3. Open the **Deployments** tab → click **Create deployment** (or **Upload assets**).
+4. **Drag the `dist` folder** onto the upload area, or click to browse and select it.
+5. Click **Deploy**.
+
+Deployment takes ~30 seconds. The custom domain (`mustatar.com.sa`) updates automatically — no DNS changes needed.
+
+> **Important:** upload the **`dist` folder itself** (or its contents) so that `index.html` sits at the **top level** of the upload. If it ends up nested inside another folder, the site will 404.
+
+**3. Verify it went live**
+
+Hard-refresh the site (`Cmd/Ctrl + Shift + R`) and confirm your change is visible. To check the deployed build from the terminal:
+
+```bash
+# should print the current title
+curl -s https://mustatar.com.sa/ | grep -o "<title>[^<]*</title>"
+
+# confirm an asset loads
+curl -s -o /dev/null -w "%{http_code}\n" https://mustatar.com.sa/robots.txt
+```
+
+Because filenames are content-hashed (e.g. `index-BbCve7-0.js`), browsers pick up new builds immediately — no cache busting needed.
+
+### Rolling back
+
+In the **Deployments** tab, find a previous deployment and choose **Rollback** (⋯ menu). Useful if a build breaks something.
+
+### Automating deploys (optional)
+
+Manual uploads get tedious. Two ways to remove the step:
+
+**a) Connect the GitHub repo** — Workers & Pages → project → **Settings → Builds** → connect `FahadAlsulaiman/mustatar`, with:
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Every push to `main` then deploys automatically.
+
+**b) Deploy from the CLI** with Wrangler (already a dev dependency):
+
+```bash
+npx wrangler login                  # one-time
+npm run build
+npx wrangler pages deploy dist
+```
 
 ---
 
