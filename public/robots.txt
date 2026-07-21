@@ -1,4 +1,5 @@
-User-agent: *
-Allow: /
+# Crawl rules (Content Signals + AI crawler policy) are managed by Cloudflare
+# and injected above this file. Only the sitemap is declared here, so there is
+# no duplicate "User-agent: *" group.
 
 Sitemap: https://mustatar.com.sa/sitemap.xml
